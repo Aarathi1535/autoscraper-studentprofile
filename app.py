@@ -16,8 +16,8 @@ def fetch_hackerrank_badges_svg(username):
     """
     # Predefined list of valid HackerRank badges
     VALID_HACKERRANK_BADGES = {
-        'Problem Solving', 'Java', 'Python', 'C', 'C++', 'C#', 'JavaScript',
-        'SQL', '30 Days of Code', '10 Days of JavaScript', '10 Days of Statistics',
+        'Problem Solving', 'Java', 'Python', 'C', 'Cpp', 'C#', 'JavaScript',
+        'Sql', '30 Days of Code', '10 Days of JavaScript', '10 Days of Statistics',
         'Algorithms', 'Data Structures', 'Regex', 'Artificial Intelligence',
         'Databases', 'Shell', 'Linux Shell', 'Functional Programming',
         'Mathematics', 'Days of ML', 'Rust', 'Kotlin', 'Swift', 'Scala',
@@ -58,7 +58,7 @@ def fetch_hackerrank_badges_svg(username):
                 stars_in_section = star_section.find_all('svg', class_='badge-star')
             
             # Try to identify actual badges by looking for meaningful patterns
-            badge_keywords = ['java', 'python', 'sql', 'javascript', 'c++', 'problem solving', 
+            badge_keywords = ['java', 'python', 'sql', 'javascript', 'cpp', 'problem solving', 
                             'algorithms', 'data structures', '30 days', '10 days', 'ruby', 
                             'swift', 'golang', 'rust', 'kotlin', 'scala', 'c', 'shell',
                             'functional programming', 'object oriented programming']
@@ -72,12 +72,18 @@ def fetch_hackerrank_badges_svg(username):
                 for keyword in badge_keywords:
                     if keyword in text_lower:
                         
+                        # ✅ Check if badge is in VALID_HACKERRANK_BADGES
+                        text_title = text.strip().title()
+                        if text_title not in VALID_HACKERRANK_BADGES:
+                            continue  # Skip if not a valid badge name
+                        
                         # Find the text element in the soup
                         text_elem = None
                         for elem in text_elements:
                             if elem.get_text().strip().lower() == text_lower:
                                 text_elem = elem
                                 break
+
                         
                         stars = 0
                         if text_elem:
@@ -178,9 +184,7 @@ def fetch_hackerrank_badges_svg(username):
                     seen.add(badge_key)
                     unique_badges.append(badge)
             
-            st.write(f"**🎯 Final Results: Identified {len(unique_badges)} real badges:**")
-            for badge in unique_badges:
-                st.write(f"- {badge['Badge Name']}: {badge['Stars']} stars")
+            
             
             return unique_badges if unique_badges else None
             
@@ -199,6 +203,7 @@ st.set_page_config(page_title="Student Performance Dashboard", layout="wide")
 @st.cache_data
 def load_student_data():
     df = pd.read_csv('III_DS-Student_Profiles.csv')
+    
     # Clean column names
     df.columns = df.columns.str.strip()
     return df
