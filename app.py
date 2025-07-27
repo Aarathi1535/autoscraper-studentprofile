@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
 import requests
-from PIL import Image
-import os
 
-# Load student data (ensure roll_no is string in your CSV)
+# Load student data
 df = pd.read_csv('students.csv', dtype={'roll_no': str})
 
 st.set_page_config(page_title="Student Performance Dashboard", layout="centered")
@@ -17,15 +15,6 @@ if roll:
     if not student.empty:
         data = student.iloc[0]
 
-        # Display student image (image path from CSV or derived from roll number)
-        image_path = f"student_images/{roll}.png"  # or .jpg if applicable
-        if os.path.exists(image_path):
-            img = Image.open(image_path)
-            st.image(img, caption=f"{data['name']}'s Photo", use_container_width=True)
-        else:
-            st.info("📷 Image not found for this student.")
-
-        # Show CGPA
         st.subheader(f"🎓 CGPA: {data['cgpa']}")
 
         # SGPA Chart
@@ -47,25 +36,13 @@ if roll:
             else:
                 st.error("Failed to fetch LeetCode stats.")
 
-        # HackerRank Badges
+        # HackerRank Badge Image (Scraped as Image)
         st.markdown("### 🎖️ HackerRank Badges")
-        if st.button("Fetch HackerRank Badges"):
+        if st.button("Show HackerRank Badges"):
             try:
                 hr_username = data['hackerrank_url'].rstrip('/').split('/')[-1]
-                api_url = f"https://www.hackerrank.com/rest/hackers/{hr_username}/profile"
-                hr_res = requests.get(api_url)
-                if hr_res.status_code == 200:
-                    hr_data = hr_res.json()
-                    badges = hr_data.get('badges', [])
-                    if badges:
-                        for badge in badges:
-                            name = badge.get('name')
-                            stars = badge.get('stars', {}).get('total', 0)
-                            st.markdown(f"🌟 **{name}** - ⭐ {stars}")
-                    else:
-                        st.info("No badges found.")
-                else:
-                    st.error("Could not fetch HackerRank badges. Check username or profile visibility.")
+                badge_image_url = f"https://hackerrank-badges.vercel.app/{hr_username}"
+                st.image(badge_image_url, caption=f"HackerRank Badges for {hr_username}", use_column_width=True)
             except Exception as e:
                 st.error(f"Error: {str(e)}")
 
