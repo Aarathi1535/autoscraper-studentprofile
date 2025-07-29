@@ -16,7 +16,7 @@ def fetch_hackerrank_badges_svg(username):
     """
     # Predefined list of valid HackerRank badges
     VALID_HACKERRANK_BADGES = {
-        'Problem Solving', 'Java', 'Python', 'C', 'Cpp', 'C#', 'JavaScript',
+        'Problem Solving', 'Java', 'Python', 'C Language', 'Cpp', 'C#', 'JavaScript',
         'Sql', '30 Days of Code', '10 Days of JavaScript', '10 Days of Statistics',
         'Algorithms', 'Data Structures', 'Regex', 'Artificial Intelligence',
         'Databases', 'Shell', 'Linux Shell', 'Functional Programming',
