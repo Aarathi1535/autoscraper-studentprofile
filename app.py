@@ -12,7 +12,7 @@ st.sidebar.subheader("Upload Student Data")
 uploaded_file = st.sidebar.file_uploader("Upload CSV or Excel file", type=["csv", "xlsx"])
 
 # Required columns for validation
-REQUIRED_COLUMNS = ["Roll Number", "CGPA", "Total Backlogs", "Leet code links", "Hackerrank profile link"]
+REQUIRED_COLUMNS = ["Roll Number", "LeetCode URL", "HackerRank URL"]
 
 @st.cache_data
 def load_student_data(file):
@@ -167,3 +167,4 @@ elif choice == "Bulk Data Download":
             file_name="Enriched_Student_Data.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
+
