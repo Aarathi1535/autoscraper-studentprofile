@@ -499,9 +499,9 @@ if uploaded_file is not None:
                 enhanced_df['LeetCode_Status'] = ''
                 enhanced_df['HackerRank_Total_Badges'] = ''
                 enhanced_df['HackerRank_Total_Stars'] = ''
-                enhanced_df['HackerRank_Badge_Details'] = ''
+                #enhanced_df['HackerRank_Badge_Details'] = ''
                 enhanced_df['HackerRank_Status'] = ''
-                enhanced_df['Data_Fetch_Timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                #enhanced_df['Data_Fetch_Timestamp'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 
                 progress_bar = st.progress(0)
                 status_text = st.empty()
@@ -514,7 +514,7 @@ if uploaded_file is not None:
                     status_text.text(f"Processing student {idx + 1}/{total_students}: {row['Roll Number']}")
                     
                     # Fetch LeetCode data
-                    leetcode_url = row['Leet code links']
+                    leetcode_url = row['LeetCode profile']
                     if pd.notna(leetcode_url) and leetcode_url != '' and 'leetcode.com' in str(leetcode_url):
                         try:
                             username = str(leetcode_url).rstrip('/').split('/')[-1]
@@ -537,7 +537,7 @@ if uploaded_file is not None:
                         enhanced_df.at[idx, 'LeetCode_Status'] = 'No URL'
                     
                     # Fetch HackerRank data using new SVG parsing method
-                    hackerrank_url = row['Hackerrank profile link']
+                    hackerrank_url = row['Hackerrank profile']
                     if pd.notna(hackerrank_url) and hackerrank_url != '' and 'hackerrank.com' in str(hackerrank_url):
                         try:
                             username = str(hackerrank_url).rstrip('/').split('/')[-1]
@@ -550,7 +550,7 @@ if uploaded_file is not None:
                                 
                                 enhanced_df.at[idx, 'HackerRank_Total_Badges'] = total_badges
                                 enhanced_df.at[idx, 'HackerRank_Total_Stars'] = total_stars
-                                enhanced_df.at[idx, 'HackerRank_Badge_Details'] = badge_summary
+                                #enhanced_df.at[idx, 'HackerRank_Badge_Details'] = badge_summary
                                 enhanced_df.at[idx, 'HackerRank_Status'] = 'Success'
                             else:
                                 enhanced_df.at[idx, 'HackerRank_Status'] = 'No Badges Found'
@@ -1306,4 +1306,5 @@ elif option == "Bulk Data Download":
 st.markdown("---")
 st.markdown("**Note:** This dashboard fetches real-time data from LeetCode and HackerRank. The new SVG parsing method provides more accurate badge information than the previous OCR approach.")
 '''
+
 
