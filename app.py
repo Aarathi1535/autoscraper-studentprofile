@@ -467,14 +467,15 @@ if uploaded_file is not None:
                     st.markdown("### 📊 Performance Summary")
                     
                     # Performance metrics
-                    cgpa_status = "Excellent" if data['CGPA'] >= 9.0 else "Good" if data['CGPA'] >= 8.0 else "Average" if data['CGPA'] >= 7.0 else "Below Average"
-                    backlog_status = "No Backlogs" if data['Total Backlogs'] == 0 else f"{data['Total Backlogs']} Backlog(s)"
-                    
+                    #cgpa_status = "Excellent" if data['CGPA'] >= 9.0 else "Good" if data['CGPA'] >= 8.0 else "Average" if data['CGPA'] >= 7.0 else "Below Average"
+                    #backlog_status = "No Backlogs" if data['Total Backlogs'] == 0 else f"{data['Total Backlogs']} Backlog(s)"
+                    '''
                     col1, col2 = st.columns(2)
                     with col1:
                         st.info(f"**CGPA Status:** {cgpa_status}")
-                        st.info(f"**Backlog Status:** {backlog_status}")
-                    with col2:
+                        st.info(f"**Backlog Status:** {backlog_status}") '''
+                    col1 = st.column(1)
+                    with col1:
                         st.info(f"**HackerRank Profile:** {'✅ Available' if pd.notna(data['Hackerrank profile link']) else '❌ Not Available'}")
                         st.info(f"**LeetCode Profile:** {'✅ Available' if pd.notna(data['Leet code links']) else '❌ Not Available'}")
             else:
@@ -1306,5 +1307,6 @@ elif option == "Bulk Data Download":
 st.markdown("---")
 st.markdown("**Note:** This dashboard fetches real-time data from LeetCode and HackerRank. The new SVG parsing method provides more accurate badge information than the previous OCR approach.")
 '''
+
 
 
