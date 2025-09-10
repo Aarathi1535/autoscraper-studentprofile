@@ -202,15 +202,29 @@ st.set_page_config(page_title="Student Performance Dashboard", layout="wide")
 
 # Load student data
 @st.cache_data
-def load_student_data():
-    df = pd.read_csv('2nd_year.csv')
+def load_student_data(uploaded_file):
+    df = pd.read_csv(uploaded_file)
     
     # Clean column names
     df.columns = df.columns.str.strip()
     return df
 
-df = load_student_data()
 st.title("📊 Student Performance Dashboard")
+
+st.header("📁 Upload Student Data")
+
+# Show requirements first
+with st.expander("📋 Click here to see CSV file requirements and format", expanded=False):
+    show_column_requirements()
+
+# File uploader
+uploaded_file = st.file_uploader(
+    "Choose a CSV file", 
+    type="csv",
+    help="Upload a CSV file containing student data with required columns"
+)
+df = load_student_data(uploaded_file)
+
 
 # Sidebar for navigation
 st.sidebar.title("Navigation")
@@ -1330,3 +1344,4 @@ if df is not None and len(df) > 0:
                                                         badge_name = st.text_input(f"Badge {i+1} Name:", key=f"name_{i}")
                                                     with col2:
                                                         badge_stars = st.number_input(f"Badge {i+1} Stars:", min_value=0, max_value=5, value=0, key=f"stars_{i}")
+
