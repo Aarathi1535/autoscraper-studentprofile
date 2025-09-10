@@ -475,8 +475,8 @@ if uploaded_file is not None:
                         st.info(f"**CGPA Status:** {cgpa_status}")
                         st.info(f"**Backlog Status:** {backlog_status}") '''
     
-                    st.info(f"**HackerRank Profile:** {'✅ Available' if pd.notna(data['Hackerrank profile link']) else '❌ Not Available'}")
-                    st.info(f"**LeetCode Profile:** {'✅ Available' if pd.notna(data['Leet code links']) else '❌ Not Available'}")
+                    st.info(f"**HackerRank Profile:** {'✅ Available' if pd.notna(data['Hackerrank profile']) else '❌ Not Available'}")
+                    st.info(f"**LeetCode Profile:** {'✅ Available' if pd.notna(data['LeetCode profile']) else '❌ Not Available'}")
             else:
                 st.error("❌ Roll number not found.")
     
@@ -1306,6 +1306,7 @@ elif option == "Bulk Data Download":
 st.markdown("---")
 st.markdown("**Note:** This dashboard fetches real-time data from LeetCode and HackerRank. The new SVG parsing method provides more accurate badge information than the previous OCR approach.")
 '''
+
 
 
 
