@@ -213,9 +213,7 @@ st.title("📊 Student Performance Dashboard")
 
 st.header("📁 Upload Student Data")
 
-# Show requirements first
-with st.expander("📋 Click here to see CSV file requirements and format", expanded=False):
-    show_column_requirements()
+
 
 # File uploader
 uploaded_file = st.file_uploader(
@@ -662,3 +660,4 @@ elif option == "Bulk Data Download":
 # Footer
 st.markdown("---")
 st.markdown("**Note:** This dashboard fetches real-time data from LeetCode and HackerRank. The new SVG parsing method provides more accurate badge information than the previous OCR approach.")
+
