@@ -203,7 +203,7 @@ st.set_page_config(page_title="Student Performance Dashboard", layout="wide")
 # Load student data
 @st.cache_data
 def load_student_data():
-    df = pd.read_csv('III_DS-Student_Profiles.csv')
+    df = pd.read_csv('2nd_year.csv')
     
     # Clean column names
     df.columns = df.columns.str.strip()
@@ -648,3 +648,4 @@ elif option == "Bulk Data Download":
 # Footer
 st.markdown("---")
 st.markdown("**Note:** This dashboard fetches real-time data from LeetCode and HackerRank. The new SVG parsing method provides more accurate badge information than the previous OCR approach.")
+
