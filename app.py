@@ -235,7 +235,7 @@ if uploaded_file is not None:
                 
                 with tab1:
                     st.markdown("### 🧠 LeetCode Statistics")
-                    leetcode_url = data['Leet code links']
+                    leetcode_url = data['LeetCode profile']
                     
                     if pd.notna(leetcode_url) and leetcode_url != '' and 'leetcode.com' in str(leetcode_url):
                         if st.button("Fetch LeetCode Stats", key="leetcode_btn"):
@@ -336,7 +336,7 @@ if uploaded_file is not None:
                 
                 with tab2:
                     st.markdown("### 🎖️ HackerRank Statistics")
-                    hackerrank_url = data['Hackerrank profile link']
+                    hackerrank_url = data['Hackerrank profile']
                     
                     if pd.notna(hackerrank_url) and hackerrank_url != '' and 'hackerrank.com' in str(hackerrank_url):
                         if st.button("Fetch HackerRank Stats", key="hackerrank_btn"):
@@ -1306,3 +1306,4 @@ elif option == "Bulk Data Download":
 st.markdown("---")
 st.markdown("**Note:** This dashboard fetches real-time data from LeetCode and HackerRank. The new SVG parsing method provides more accurate badge information than the previous OCR approach.")
 '''
+
